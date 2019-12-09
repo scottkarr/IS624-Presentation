@@ -1,0 +1,346 @@
+---
+title: "Data Science in Education"
+author: "Scott Karr"
+date: December 9, 2019
+output: 
+  ioslides_presentation:
+    widescreen: true
+---
+
+##
+```{r, out.width = "1000px",echo=FALSE}
+url <- "~/IS624Fall2019/Presentation/NEWYORKER.png"
+knitr::include_graphics(url)
+```
+
+# A Policy Challenge
+
+## Overview
+<font size="4">
+
+Problem Definition  
+
+- A third of the approximately 80,000 NYC 8th graders applying to high school sit for the SHSAT. 
+- Admitted students represent ~20% of test takers (5,000 students). 
+- Admitted students attend 45 “feeder” middle schools ~20% of the schools. 
+- Specialized high schools are unbalanced demographically. 
+- The biggest imbalances are with admitted Black/Latino, ELL and Economically disadvantaged students. 
+
+Research Purpose 
+
+- Provide PASSNYC specific recommendations on increase SHSAT takers in underperforming school districts. 
+-	Address factors that improve SHSAT success at students in underperforming districts. 
+
+</font>
+
+## Feeder School Concentration
+```{r, echo=FALSE,out.width="55%", out.height="20%",fig.cap="",fig.show='hold',fig.align='center'}
+url <- "~/IS624Fall2019/Presentation/FEEDER-SCHOOLS.png"
+knitr::include_graphics(url)
+```
+
+## Specialized High School Acceptances 2019
+```{r, echo=FALSE,out.width="100%", out.height="20%",fig.cap="",fig.show='hold',fig.align='center'}
+url <- "~/IS624Fall2019/Presentation/SHSAT-ADMISSIONS-RESULTS.png"
+knitr::include_graphics(url)
+```
+
+## Graph of Acceptances by Zipcode
+```{r, echo=FALSE,out.width="80%", out.height="20%",fig.cap="Feeder Schools",fig.show='hold',fig.align='center'}
+url <- "~/IS624Fall2019/Presentation/GRAPH-ZIP-DECILE.png"
+knitr::include_graphics(url)
+```
+
+## Brooklyn Zipcode 11204 
+```{r, echo=FALSE,out.width="80%", out.height="20%",fig.cap="Feeder Schools Detail",fig.show='hold',fig.align='center'}
+url <- "~/IS624Fall2019/Presentation/zip-11204.png"
+knitr::include_graphics(url)
+```
+
+# What is PASSNYC?
+Not-for-profit to address underserved NYC DOE students in the reputable Specialized High Schools process.  
+
+```{r, out.width = "900px",echo=FALSE}
+url <- "~/IS624Fall2019/Presentation/PASSNYC.png"
+knitr::include_graphics(url)
+```
+
+
+
+## PASSNYC
+<font size="4">
+
+How can PASSNYC address the Diversification of NYC Specialized High Schools using Data Science? 
+
+- Sponsors a Kaggle Competition for Recommender System Solutions. 
+- Goal is to close the diversity gap at 8 NYC Specialized High Schools. 
+- Recommendations focus is on reaching the underserved students and preparing them for taking the SHSAT. 
+
+</font>
+
+# Data
+
+## Exploratory Data Analysis
+- NYC DOE & PASSNYC provide an extensive dataset to research this project?   
+
+```{r, echo=FALSE,out.width="49%", out.height="20%",fig.cap="",fig.show='hold'}
+url1 <- "~/IS624Fall2019/Presentation/ELA-MATH-SCORE-TIMESERIES.png"
+
+url2 <- "~/IS624Fall2019/Presentation/DATA.png"
+knitr::include_graphics(c(url1,url2))
+```
+
+
+## Economic Need vs. Income
+```{r, out.width = "475px",echo=FALSE}
+url1 <- "~/IS624Fall2019/Presentation/NEED-VS-INCOME-REG.png"
+knitr::include_graphics(url1)
+
+url2 <- "~/IS624Fall2019/Presentation/GEOG-ECONOMIC-NEED.png"
+knitr::include_graphics(url2)
+```
+
+## Economic Need by Ethnicity
+```{r, out.width = "475px",echo=FALSE}
+url3 <- "~/IS624Fall2019/Presentation/NEED-VS-INCOME-MAP.png"
+knitr::include_graphics(url3)
+
+url4 <- "~/IS624Fall2019/Presentation/ETHN-VS-ECON-REG.png"
+knitr::include_graphics(url4)
+```
+
+## Academic Rigor by Ethnicity
+```{r, out.width = "750px",echo=FALSE}
+url5 <- "~/IS624Fall2019/Presentation/ETHN-VS-RIGOR.png"
+knitr::include_graphics(url5)
+```
+
+## Achievement By Cluster
+```{r, out.width = "600px",echo=FALSE}
+url6 <- "~/IS624Fall2019/Presentation/ACH-VS-NEED-HIST.png"
+knitr::include_graphics(url6)
+```
+
+## Proportion of students that take the SHSAT
+```{r, echo=FALSE,out.width="75%", out.height="20%",fig.cap="",fig.show='hold',fig.align='center'}
+# https://www.kaggle.com/randylaosat/simple-exploratory-data-analysis-passnyc
+url <- "~/IS624Fall2019/Presentation/SHSAT-REG-BY-SCHOOL.png"
+knitr::include_graphics(url)
+```
+
+
+## Common Core Test Timeseries - Grades 3-8
+```{r, echo=FALSE,out.width="49%", out.height="20%",fig.cap="",fig.show='hold'}
+# [Shiny Data Explorer](<https://alexromero.shinyapps.io/PASSNYC>)
+url1 <- "~/IS624Fall2019/Presentation/ELA-TIMESERIES.png"
+knitr::include_graphics(url1)
+
+url2 <- "~/IS624Fall2019/Presentation/MATH-TIMESERIES.png"
+knitr::include_graphics(c(url1,url2))
+```
+
+# Models
+
+# PASSNYC Excerpt 1
+
+## 4 Classifiers
+- Random Forest Classifier (RF)
+- Linear Support Vector Classification (LSVC)
+- Gaussian Naive Bayes (GNB)
+- Linear Discriminant Analysis (LDA)
+
+```{r, echo=FALSE,out.width="40%", out.height="20%",fig.cap="Models",fig.show='hold',fig.align='center'}
+url <- "~/IS624Fall2019/Presentation/4-CLASS-MODELS.png"
+knitr::include_graphics(url)
+```
+
+## Metrics  
+- Multi-class problem - uses average F1 scores for each class  
+- Takes into account label imbalances  
+- Computes confusion matrix over all classes, and then computes precision  
+- Recall, and f-score uses these counts  
+  
+## Ranking Predictors of SHSAT Success
+```{r, echo=FALSE,out.width="50%", out.height="20%",fig.cap="Features",fig.show='hold',fig.align='center'}
+# https://towardsdatascience.com/data-science-takes-on-public-education-f432910ea9f0  
+url <- "~/IS624Fall2019/Presentation/LDA-FEATURES-RANKING.png"
+knitr::include_graphics(url)
+```
+
+
+# PASSNYC Excerpt 2
+
+## Data Analysis
+- Least Sent vs. Most Students sent to Specialized High Schools
+
+```{r, echo=FALSE,out.width="49%", out.height="20%",fig.cap="",fig.show='hold'}
+# https://www.kaggle.com/erikbruin/recommendations-to-passnyc-1st-place-solution
+url <- "~/IS624Fall2019/Presentation/LEAST-SENT-2-SHS.png"
+knitr::include_graphics(url)
+
+url <- "~/IS624Fall2019/Presentation/MOST-SENT-2-SHS.png"
+knitr::include_graphics(url)
+```
+
+##
+
+Recommendation 1:
+
+<font size="3"> 
+
+Increase the number of SHSAT takers by focusing on schools with good average academics and few takers
+
+SHSAT participation is highly correlated to the academic performance.  33 schools with good or average academics in underperforming districts were identified using Linear Regression and add approximately 20 candidates per school yielding at least 660 SHSAT candidates.
+
+</font>
+
+Recommendation 2: 
+
+<font size="3"> 
+
+Increase SHSAT pass rates by focusing on schools with many “Level4 students” and few offers
+
+There are 472 schools that received 0-5 offers per school.  Regression models show high correlation between SHSAT success and Level4 scores on Common Core exams.  These 33 schools are estimated to yield 408 additional SHSAT candidates in predominatly Black/Hispanic schools which would move the needle on the demographic balance somewhat.
+
+</font>
+
+Recommendation 3: 
+
+<font size="3"> 
+
+Focus on bright students in underperforming schools with low SHSAT participation and low academics.
+
+The common denominator seems that these schools all have really low performing academics and a culture that avoids the SHSAT.  At least 35 such schools had at least one Level4 result.  Focusing resources on these schools would better prepare students with critical reading and math skills should yield additional Specialized High School seats. 
+
+</font>
+
+
+# PASSNYC Excerpt 3
+
+## Classify and Recommend
+- Identify Underrepresented Schools
+- K-Means Clustering, 3 groups of likely admission to SPHS 
+- Recommendation of Intervetions
+
+
+```{r, echo=FALSE,out.width="65%", out.height="20%",fig.cap="",fig.show='hold',fig.align='center'}
+# https://www.kaggle.com/laiyipeng/target-schools-action-recommended-for-passnyc
+url <- "~/IS624Fall2019/Presentation/VENN-DIAGRAM.jpg"
+knitr::include_graphics(url)
+```
+
+## Gender, Ethnicity & Need Distributions
+```{r, echo=FALSE,out.width="50%", out.height="20%",fig.cap="Features",fig.show='hold',fig.align='center'}
+url <- "~/IS624Fall2019/Presentation/ECON-DISTRIB-1.png"
+knitr::include_graphics(url)
+
+url <- "~/IS624Fall2019/Presentation/ECON-DISTRIB-2.png"
+knitr::include_graphics(url)
+
+url <- "~/IS624Fall2019/Presentation/ECON-DISTRIB-3.png"
+knitr::include_graphics(url)
+```
+
+
+##  Underrepresentation
+
+```{r, echo=FALSE,out.width="30%", out.height="20%",fig.cap="",fig.show='hold',fig.align='center'}
+url <- "~/IS624Fall2019/Presentation/UNDERREPRESENTATION-1.png"
+knitr::include_graphics(url)
+```
+
+```{r, echo=FALSE,out.width="45%", out.height="20%",fig.cap="",fig.show='hold',fig.align='center'}
+url <- "~/IS624Fall2019/Presentation/UNDERREPRESENTATION-2.png"
+knitr::include_graphics(url)
+```
+
+##  Model
+<font size="3">
+Elbow method based on within-cluster sum of squares determines that the optimal number of cluster is 3. Using 20 features listed above, k-means algorithm partitions 472 middle schools with non-demographic data available into 3 clusters with different levels of academic performance as shown in the following scatterplot.
+</font>
+
+```{r, echo=FALSE,out.width="45%", out.height="20%",fig.cap="KNN-Model",fig.show='hold',fig.align='center'}
+url <- "~/IS624Fall2019/Presentation/KNN-MODEL.png"
+knitr::include_graphics(url)
+```
+
+
+##
+
+Recommendation 1:
+
+<font size="3"> 
+
+On-campus intervention at 5 schools in Cluster A representing middle schools most likely to have students qualified for SPHS. 
+
+</font>
+
+Recommendation 2:
+
+<font size="3"> 
+
+Awareness campaign at 48 schools in Cluster B to boost awareness about SHSAT and SPHS at 48 middle schools in Cluster B:
+
+</font>
+
+Recommendation 3:
+
+<font size="3"> 
+
+Regional information sessions and workshops at 3 locations for all schools
+Middle schools in top 25% of the Underrepresentation Score cluster around three locations: Harlem, Bronx and Brooklyn (Braodway Junction), neighborhoods have a high proportion of Black and Hispanic residents.
+
+Awareness: Organize regional information sessions in Harlem, Bronx and Brooklyn (Broadway Junction) to direct parents and students to resources available.  Organize regional test preparation workshops in these neighborhoods.
+
+</font>
+
+# PASSNYC Excerpt 4
+
+## Decision Tree Classifier
+```{r, out.width = "800px",echo=FALSE}
+# https://www.kaggle.com/maheshdadhich/driving-factors-model-and-proxy-measures
+url <- "~/IS624Fall2019/Presentation/DECISION-TREE.png"
+knitr::include_graphics(url)
+```
+
+##
+
+Recommendation:
+
+<font size="3"> 
+
+Why decision tree workflow? 
+To explain the results business people and partner organizations
+
+Whenever one has to explain a difficult statistical model to stakeholders, one can use decision trees. Decision trees basically unfolds the complete process of decision making and series of decision to reach to the conclusion. Here we will have to focus on "yes" class, as it means yes that particular school is underperforming. This is one of the simplest methods and most convinient methods when it comes to explain the statistical model to partners (or even to layman population)
+
+</font>
+
+
+# Conclusion
+
+## Summary of Analysis and Recommendations
+<font size="3">
+
+- The PASSNYC competition accentuates the underserved schools in the city by geographic, demographic, economically and over time.  The "Recommendor" systems results show schools grouped into 3 categories roughly equating to 1) Students with high academic scores that don't take the SHSAT 2) Students with average academic scores where focussed intruction could yield more students eligible for the Specialized High Schools.  3) Students with below average academic scores where the objective is academic intervention to bring students up to standard.
+
+- Outreach to students in the first group which are academically prepared is a second order problem requiring awareness and test preparation.
+The second and third groups require more in-depth academic intervention and preparation during grade school to bring the majority of students
+up to academic standards and provide opportunities for the top students among these underserved groups to also prepare for the SHSAT.
+
+- To the extent that such interventions occur, the demographic balance of the Specialized High Schools will become more aligned with the city's demographics and these schools will retain their merit-based selectivity.
+
+</font>
+
+## References
+
+<font size="3"> 
+
+https://www.kaggle.com/passnyc/data-science-for-good/discussion/63311
+https://alexromero.shinyapps.io/PASSNYC
+https://towardsdatascience.com/data-science-takes-on-public-education-f432910ea9f0 
+https://patch.com/new-york/new-york-city/just-45-middle-schools-gave-specialized-high-schools-60-percent-their https://www.nytimes.com/interactive/2018/06/29/nyregion/nyc-high-schools-middle-schools-shsat-students.html
+http://jonathansoma.com/lede/algorithms-2017/classes/networks/networkx-graphs-from-source-target-dataframe/
+https://programminghistorian.org/en/lessons/exploring-and-analyzing-network-data-with-python
+
+</font>
